@@ -1,17 +1,33 @@
+// Footer.tsx
 import React from 'react';
-
-interface FooterProps
-{
-   year:number;
-   company:string;
-
+import propTypes from 'prop-types';
+interface FooterProps {
+    year: number;
+    company?: string;
 }
-function Footer(props:FooterProps) {
-   return( <div>
+
+// functional/presentation component
+// Create and Return V.dom
+// SFC - Stateless Functional Component
+const  Footer: React.SFC<FooterProps> = (props) => {
+    
+    return (
+        <div>
             <hr />
-            <p>Copyrights of { props.company} { props.year}</p>
+            <p>Copyrights @{props.year}, {props.company} </p>
+            {props.children}
         </div>
-   );
+    )
 }
+
+Footer.defaultProps = {
+    // when the props are not passed from parent
+    company: 'Product App'
+}
+
+Footer.propTypes={
+   year: propTypes.number.isRequired,
+   company: propTypes.string.isRequired
+};
 
 export default Footer;
