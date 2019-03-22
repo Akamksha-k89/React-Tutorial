@@ -8,7 +8,10 @@ import Home from './components/Home';
 import Cart from './components/Cart';
 import Checkout from './components/Checkout';
 import Counter from './components/Counter';
-
+import MobxCounter from './components/MobxCounter';
+import MobxReactCounter from './components/MobxReactCounter';
+import MobxCart from './components/MobxCart';
+//HashRouter is for hash in url
 import {BrowserRouter as Router,
         Route, 
         Switch
@@ -42,11 +45,14 @@ class App extends React.Component {
                             <h2>About</h2>
                         </div>
                     )  } />
+                <Route path="/mobxCount"  component={MobxCounter}/>
+                <Route path="/mobx-cart" 
+                        render={() => <MobxCart /> } />
 
                 <Route path="/counter" 
                         render={() => <Counter startValue={333} /> } />
                     
-
+<Route path="/MobxReactCounter" component={MobxReactCounter}/>
                     <Route path='*' component={NotFound} />
                 </Switch>
 
