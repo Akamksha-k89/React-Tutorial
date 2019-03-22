@@ -17,6 +17,7 @@ interface CounterState {
 class Counter extends React.Component<CounterProps, CounterState> {
     constructor(props: CounterProps) {
         super(props); // MUST
+
         console.log('Counter obj created', props);
 
         // react keyword

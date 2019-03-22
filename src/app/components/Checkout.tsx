@@ -36,7 +36,7 @@ class Checkout extends React.Component<CheckoutProps, CheckoutState> {
         };
 
         this.setState(newFields);
-        this.pElem.textContent =  e.target.value
+        this.pElem.textContent =  e.target.value;
     }
 
     componentDidMount() {

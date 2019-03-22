@@ -1,15 +1,75 @@
+// Header.tsx
 import React from 'react';
 
-interface Headerprops{
-    title:string;
+interface HeaderProps {
+    title: string;
 }
-const Header = (props:Headerprops)=>{
+
+import {NavLink} from 'react-router-dom';
+ 
+// SFC Stateless Functional component
+
+// ES6 style
+// functional component
+// props are passed as function argument
+const Header: React.SFC<HeaderProps> = (props) => {
+    // props are immutable
+    // error props.title = 'test'; 
     return (
         <div>
-            <h1>Product {props.title}</h1>
-            <hr/>
+            <h2>{props.title}</h2>
+
+            <NavLink to="/" className="button"
+                            activeClassName="success"
+            >
+                Home
+            </NavLink>
+
+            <NavLink to="/products" className="button"
+                            activeClassName="success"
+            >
+                Products
+            </NavLink>
+
+            <NavLink to="/cart" className="button"
+                            activeClassName="success"
+            >
+                Cart
+            </NavLink>
+
+
+            <NavLink to="/mobx-cart" className="button"
+                            activeClassName="success"
+            >
+                Mobx Cart
+            </NavLink>
+
+
+            <NavLink to="/checkout" className="button"
+                            activeClassName="success"
+            >
+                Checkout
+            </NavLink>
+
+
+            <NavLink to="/about" className="button"
+                            activeClassName="success"
+            >
+                About
+            </NavLink>
+
+
+            <NavLink to="/counter" className="button"
+                            activeClassName="success"
+            >
+                Counter
+            </NavLink>
+
+
+
+            <hr />
         </div>
-    );
-};
+    )
+}
 
 export default Header;
