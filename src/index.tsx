@@ -1,3 +1,4 @@
+// index.tsx
 import React from 'react';
 
 import ReactDOM from 'react-dom';
@@ -12,11 +13,13 @@ import {Provider} from 'mobx-react';
 
 import counter from './app/state/CounterState';
 import {CartState} from './app/state/CartState';
+import {ProductState} from './app/state/ProductState';
 
 // a store contains multiple states
 const store = {
     counter: counter,
-    cart: new CartState() //cart: cart
+    cart: new CartState(), 
+    product: new ProductState()
     //cart: cart,
     //...
 }

@@ -1,27 +1,30 @@
 // Header.tsx
 import React from 'react';
 
-interface HeaderProps {
-    title: string;
-}
 
 import {NavLink} from 'react-router-dom';
 import { observer, inject } from 'mobx-react';
+import { CartState } from '../state/CartState';
 import Cart from './Cart';
- 
+
+interface HeaderProps {
+    title: string;
+    cart?: CartState;
+}
+  
 // SFC Stateless Functional component
 
 // ES6 style
 // functional component
 // props are passed as function argument
-const Header: React.SFC<HeaderProps> = inject("cart", 'counter') (observer((props) => {
+const Header: React.SFC<HeaderProps> = (props) => {
     // props are immutable
     // error props.title = 'test'; 
     return (
         <div>
             <h2>{props.title}</h2>
 
-            <NavLink to="/" className="button"
+            <NavLink to="/" exact className="button"
                             activeClassName="success"
             >
                 Home
@@ -43,23 +46,7 @@ const Header: React.SFC<HeaderProps> = inject("cart", 'counter') (observer((prop
             <NavLink to="/mobx-cart" className="button"
                             activeClassName="success"
             >
-                Mobx Cart
-            </NavLink>
-            <NavLink to="/mobxCount" className="button"
-                            activeClassName="success"
-            >
-                Mobx Counter
-            </NavLink>
-            <NavLink to="/MobxReactCounter" className="button"
-                            activeClassName="success"
-            >
-                Mobx React Counter
-            </NavLink>
-            
-            <NavLink to="/mobx-cart" className="button"
-                            activeClassName="success"
-            >
-                Mobx Cart [{props.cart!.amount}]
+                Mobx Cart [{props.cart!.grandTotal}]
             </NavLink>
 
 
@@ -84,11 +71,35 @@ const Header: React.SFC<HeaderProps> = inject("cart", 'counter') (observer((prop
             </NavLink>
 
 
+            <NavLink to="/mobx-counter" className="button"
+                            activeClassName="success"
+            >
+                Mobx Counter
+            </NavLink>
+
+
+
+            <NavLink to="/mobx-react-counter" className="button"
+                            activeClassName="success"
+            >
+                Mobx React Counter
+            </NavLink>
+
+            <NavLink to="/MobxProductList" className="button"
+                            activeClassName="success"
+            >
+                Mobx React Product
+            </NavLink>
+
+           
+            <button onClick={ () => props.cart!.empty() }>
+               Empty Cart
+            </button> 
+
 
             <hr />
         </div>
     )
 }
-))
 
-export default Header;
+export default inject("cart", 'counter')(observer(Header));

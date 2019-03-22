@@ -1,6 +1,7 @@
 // state/CartState.ts
 import { CartItem } from './../models/CartItem';
 import {observable, computed, action} from 'mobx';
+import { Product } from '../models/Product';
 
 export class CartState {
     @observable items: CartItem[] = [];
@@ -21,6 +22,20 @@ export class CartState {
         }
 
         return totalItems;
+    }
+
+    @computed get discount() {
+        if (this.count > 4) {
+            return 10;
+        }
+
+        return 0;
+    }
+
+    @computed get grandTotal() {
+        let total = this.amount - (this.amount/100.0 * this.discount);
+
+        return total;
     }
  
     addItem(item: CartItem) {
@@ -50,8 +65,13 @@ export class CartState {
     empty() {
         this.items = [];
     }
+
+    addProductToCart(product: Product) {
+        const item = new CartItem(product.id, product.name, product.price, 1);
+        this.addItem(item);
+    }
 }
 
 // exporting CartState instance
 // or create instance in index.tsx
-// export default new CartState();
+//export default new CartState();

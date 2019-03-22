@@ -5,12 +5,16 @@ import Header from './components/Header';
 import Footer from './components/Footer';
 import Home from './components/Home';
 
-import Cart from './components/Cart';
+// import Cart from './components/Cart';
 import Checkout from './components/Checkout';
 import Counter from './components/Counter';
 import MobxCounter from './components/MobxCounter';
 import MobxReactCounter from './components/MobxReactCounter';
 import MobxCart from './components/MobxCart';
+import ProductList from './components/ProductList';
+
+
+import Loadable from 'react-loadable';
 //HashRouter is for hash in url
 import {BrowserRouter as Router,
         Route, 
@@ -22,6 +26,18 @@ const NotFound = () => (
         <h2>Page not found</h2>
     </div>
 );
+
+const Loading = () => (
+    <div>
+        <h2>Loading....</h2>
+    </div>
+)
+
+const LoadableCart = Loadable({
+    // webpack, knows import () func, it creates separate bundle for Cart/CartList..
+    loader: () => import('./components/Cart'),
+    loading: Loading,
+  });
 
 // class component
 class App extends React.Component {
@@ -38,7 +54,7 @@ class App extends React.Component {
 
                 <Switch>
                     <Route path="/" exact component={Home} />
-                    <Route path="/cart" component={Cart} />
+                    <Route path="/cart" component={LoadableCart} />
                     <Route path="/checkout" component={Checkout} />
                     <Route path='/about' render={ ()=> (
                         <div>
@@ -53,6 +69,8 @@ class App extends React.Component {
                         render={() => <Counter startValue={333} /> } />
                     
 <Route path="/MobxReactCounter" component={MobxReactCounter}/>
+<Route path="/MobxProductList" component={ProductList}/>
+
                     <Route path='*' component={NotFound} />
                 </Switch>
 
